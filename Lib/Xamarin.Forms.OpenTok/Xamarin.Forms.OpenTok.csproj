@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;netstandard1.0</TargetFrameworks>
+    <PackageId>Xamarin.Plugin.OpenTok</PackageId>
+    <Authors>Javier Cantos</Authors>
+    <Product>Xamarin.Plugin.OpenTok</Product>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageTags>opentok, ios, android, xamarin, xamarin.forms, tokbox, video, chat, plugin</PackageTags>
+    <Description>Plugin OpenTok para Xamarin.Forms</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Forms" Version="4.3.0.991211" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="MainPage.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Service\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="OpenTokLayout.cs" />
+  </ItemGroup>
+</Project>
