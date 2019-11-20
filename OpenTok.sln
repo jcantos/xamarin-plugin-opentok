@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenTok.iOS", "OpenTok\Open
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenTok", "OpenTok\OpenTok\OpenTok.csproj", "{BFD515A5-A7FA-4916-814E-05F85F210EA7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenTok.Console", "OpenTokConsole\OpenTok.Console.csproj", "{85FC37E5-872E-416D-9D9B-9565464834D4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenTok.Console", "OpenTok.Console\OpenTok.Console.csproj", "{85FC37E5-872E-416D-9D9B-9565464834D4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenTok.DemoWeb", "OpenTok.DemoWeb\OpenTok.DemoWeb.csproj", "{C7D71566-5B4E-46D2-91F7-73800C8FA435}"
 EndProject
