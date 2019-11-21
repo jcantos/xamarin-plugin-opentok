@@ -13,8 +13,8 @@ namespace OpenTok.Console
     {
         static void Main(string[] args)
         {
-            int ApiKey = 46459072;// api key project, not account
-            string ApiSecret = "5a67ef48137507c9ee787da4bbd1e9375b17e220";
+            int ApiKey = 40000000;// api key project, not account
+            string ApiSecret = "******************************";
 
             try
             {
