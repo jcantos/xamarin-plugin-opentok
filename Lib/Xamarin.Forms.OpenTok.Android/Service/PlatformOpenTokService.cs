@@ -11,6 +11,7 @@ using Com.Opentok.Android;
 using Plugin.CurrentActivity;
 using Xamarin.Forms.OpenTok.Service;
 using System.Collections.ObjectModel;
+using static Xamarin.Forms.OpenTok.Service.Enums;
 
 namespace Xamarin.Forms.OpenTok.Android.Service
 {
@@ -31,6 +32,9 @@ namespace Xamarin.Forms.OpenTok.Android.Service
         private readonly object _sessionLocker = new object();
         private readonly ObservableCollection<string> _subscriberStreamIds = new ObservableCollection<string>();
         private readonly Collection<SubscriberKit> _subscribers = new Collection<SubscriberKit>();
+
+        private Publisher.CameraCaptureResolution _resolution = Publisher.CameraCaptureResolution.High;
+        private Publisher.CameraCaptureFrameRate _frameRate = Publisher.CameraCaptureFrameRate.Fps15;
 
         private PlatformOpenTokService()
         {
@@ -53,7 +57,7 @@ namespace Xamarin.Forms.OpenTok.Android.Service
             CrossOpenTok.Init(() => new PlatformOpenTokService());
         }
 
-        public override bool TryStartSession()
+        public override bool TryStartSession(CameraCaptureResolution? resolution = CameraCaptureResolution.High, CameraCaptureFrameRate? frameRate = CameraCaptureFrameRate.Fps15)
         {
             lock (_sessionLocker)
             {
@@ -68,6 +72,9 @@ namespace Xamarin.Forms.OpenTok.Android.Service
                 EndSession();
                 IsSessionStarted = true;
 
+                _resolution = getParseResolution(resolution);
+                _frameRate = getParseFrameRate(frameRate);
+
                 using (var builder = new Session.Builder(CrossCurrentActivity.Current.AppContext, ApiKey, SessionId))
                 {
                     Session = builder.Build();
@@ -81,6 +88,55 @@ namespace Xamarin.Forms.OpenTok.Android.Service
                 }
                 return true;
             }
+        }
+
+        private Publisher.CameraCaptureResolution getParseResolution(CameraCaptureResolution? resolution)
+        {
+            Publisher.CameraCaptureResolution reply = Publisher.CameraCaptureResolution.High;
+
+            if (resolution != null)
+            {
+                switch (resolution)
+                {
+                    case CameraCaptureResolution.Low:
+                        reply = Publisher.CameraCaptureResolution.Low;
+                        break;
+                    case CameraCaptureResolution.Medium:
+                        reply = Publisher.CameraCaptureResolution.Medium;
+                        break;
+                    case CameraCaptureResolution.High:
+                        reply = Publisher.CameraCaptureResolution.High;
+                        break;
+                }
+            }
+
+            return reply;
+        }
+
+        private Publisher.CameraCaptureFrameRate getParseFrameRate(CameraCaptureFrameRate? frameRate)
+        {
+            Publisher.CameraCaptureFrameRate reply = Publisher.CameraCaptureFrameRate.Fps15;
+
+            if (frameRate != null)
+            {
+                switch (frameRate)
+                {
+                    case CameraCaptureFrameRate.Fps1:
+                        reply = Publisher.CameraCaptureFrameRate.Fps1;
+                        break;
+                    case CameraCaptureFrameRate.Fps7:
+                        reply = Publisher.CameraCaptureFrameRate.Fps7;
+                        break;
+                    case CameraCaptureFrameRate.Fps15:
+                        reply = Publisher.CameraCaptureFrameRate.Fps15;
+                        break;
+                    case CameraCaptureFrameRate.Fps30:
+                        reply = Publisher.CameraCaptureFrameRate.Fps30;
+                        break;
+                }
+            }
+
+            return reply;
         }
 
         public override void EndSession()
@@ -205,8 +261,8 @@ namespace Xamarin.Forms.OpenTok.Android.Service
             }
 
             using (var builder = new Publisher.Builder(CrossCurrentActivity.Current.AppContext)
-                .Resolution(Publisher.CameraCaptureResolution.High)
-                .FrameRate(Publisher.CameraCaptureFrameRate.Fps15)
+                .Resolution(_resolution)
+                .FrameRate(_frameRate)
                 .Name("XamarinOpenTok"))
             {
                 PublisherKit = builder.Build();

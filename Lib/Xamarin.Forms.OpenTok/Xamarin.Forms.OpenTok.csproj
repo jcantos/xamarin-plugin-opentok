@@ -17,9 +17,6 @@
     <EmbeddedResource Remove="MainPage.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Service\" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Remove="OpenTokLayout.cs" />
   </ItemGroup>
 </Project>

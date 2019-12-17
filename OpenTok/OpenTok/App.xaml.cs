@@ -18,7 +18,7 @@ namespace OpenTok
         {
             // Handle when your app starts
 
-            CrossOpenTok.Current.ApiKey = "40000000"; // OpenTok project api key, not your account
+            CrossOpenTok.Current.ApiKey = "4000000"; // OpenTok project api key, not your account
             CrossOpenTok.Current.SessionId = "2_MX40NjQ1OTA3Mn5-MTU3Mzc0OTUxNzgxMX5aRll5SkpibUhCci91eUpSd0lGMkdhZWF-UH4"; // Id of session for connecting
 
             if (Device.RuntimePlatform == Device.Android)

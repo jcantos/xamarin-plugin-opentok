@@ -9,18 +9,18 @@
              x:Class="OpenTok.ChatRoomPage">
     <ContentPage.Content>
 
-        <StackLayout>
-            <tok:OpenTokPublisherView HeightRequest="200" />
-            <StackLayout BindableLayout.ItemsSource="{Binding Path=StreamIdCollection, Source={x:Static tokService:CrossOpenTok.Current}}">
+        <StackLayout x:Name="Wrapper">
+            <!--<tok:OpenTokPublisherView HeightRequest="200" />-->
+            <!--<StackLayout BindableLayout.ItemsSource="{Binding Path=StreamIdCollection, Source={x:Static tokService:CrossOpenTok.Current}}">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate>
                         <tok:OpenTokSubscriberView HeightRequest="200" StreamId="{Binding .}"/>
                     </DataTemplate>
                 </BindableLayout.ItemTemplate>
-            </StackLayout>
+            </StackLayout>-->
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="80" />
+                    <RowDefinition Height="24" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -29,7 +29,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Button Text="End Call" TextColor="Red" Grid.Row="2" Grid.Column="0" Clicked="OnEndCall" />
-                <Button Text="Message" TextColor="Black" Grid.Row="2" Grid.Column="1" Clicked="OnMessage" />
+                <Button Text="Mute" TextColor="Black" Grid.Row="2" Grid.Column="1" Clicked="OnMute" />
                 <Button Text="Swap Camera" TextColor="Purple" Grid.Row="2" Grid.Column="2" Clicked="OnSwapCamera" />
 
             </Grid>

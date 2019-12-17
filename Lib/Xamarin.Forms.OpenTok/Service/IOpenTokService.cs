@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Threading.Tasks;
+using static Xamarin.Forms.OpenTok.Service.Enums;
 
 namespace Xamarin.Forms.OpenTok.Service
 {
@@ -33,7 +34,7 @@ namespace Xamarin.Forms.OpenTok.Service
 
         bool CheckPermissions();
 
-        bool TryStartSession();
+        bool TryStartSession(CameraCaptureResolution? resolution = CameraCaptureResolution.High, CameraCaptureFrameRate? frameRate = CameraCaptureFrameRate.Fps15);
 
         void EndSession();
 

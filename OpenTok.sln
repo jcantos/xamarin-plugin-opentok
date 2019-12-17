@@ -27,6 +27,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xamarin.Forms.OpenTok.Andro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xamarin.Forms.OpenTok.iOS", "Lib\Xamarin.Forms.OpenTok.iOS\Xamarin.Forms.OpenTok.iOS.csproj", "{234F030A-8C31-46DF-89DF-39980BB834D6}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Docs", "_Docs", "{A25D549A-FA2F-46F9-BE0D-A730F6D31C5A}"
+	ProjectSection(SolutionItems) = preProject
+		Notas.txt = Notas.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

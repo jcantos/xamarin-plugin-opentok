@@ -24,6 +24,8 @@ namespace OpenTok.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             PlatformOpenTokService.Init();
+            Rg.Plugins.Popup.Popup.Init();
+
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
 

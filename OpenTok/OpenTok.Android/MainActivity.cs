@@ -20,6 +20,8 @@ namespace OpenTok.Droid
             ToolbarResource = Resource.Layout.Toolbar;
             PlatformOpenTokService.Init();
             base.OnCreate(savedInstanceState);
+
+            Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
             CrossCurrentActivity.Current.Activity = this;
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rg.Plugins.Popup.Services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -27,11 +28,24 @@ namespace OpenTok
                         VerticalOptions = LayoutOptions.CenterAndExpand,
                         Text = "CLICK TO CHAT",
                         Command = new Command(() => {
-                            if(!CrossOpenTok.Current.TryStartSession())
+                            if(!CrossOpenTok.Current.TryStartSession(Enums.CameraCaptureResolution.High, Enums.CameraCaptureFrameRate.Fps30))
                             {
                                 return;
                             }
                             Navigation.PushAsync(new ChatRoomPage());
+                        })
+                    },
+                    new Button
+                    {
+                        VerticalOptions = LayoutOptions.CenterAndExpand,
+                        Text = "TEST POPUP",
+                        Command = new Command(async () => {
+                            if(!CrossOpenTok.Current.TryStartSession(Enums.CameraCaptureResolution.High, Enums.CameraCaptureFrameRate.Fps30))
+                            {
+                                return;
+                            }
+                            var page = new IncomingCallPage();
+                            await PopupNavigation.Instance.PushAsync(page);
                         })
                     }
                 }

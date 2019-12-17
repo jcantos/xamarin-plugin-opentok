@@ -8,6 +8,7 @@ using Foundation;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using System.Linq;
+using static Xamarin.Forms.OpenTok.Service.Enums;
 
 namespace Xamarin.Forms.OpenTok.iOS.Service
 {
@@ -20,6 +21,9 @@ namespace Xamarin.Forms.OpenTok.iOS.Service
         private readonly object _sessionLocker = new object();
         private readonly ObservableCollection<string> _subscriberStreamIds = new ObservableCollection<string>();
         private readonly Collection<OTSubscriber> _subscribers = new Collection<OTSubscriber>();
+
+        private OTCameraCaptureResolution _resolution = OTCameraCaptureResolution.High;
+        private OTCameraCaptureFrameRate _frameRate = OTCameraCaptureFrameRate.OTCameraCaptureFrameRate15FPS;
 
         private PlatformOpenTokService()
         {
@@ -42,7 +46,7 @@ namespace Xamarin.Forms.OpenTok.iOS.Service
             CrossOpenTok.Init(() => new PlatformOpenTokService());
         }
 
-        public override bool TryStartSession()
+        public override bool TryStartSession(CameraCaptureResolution? resolution = CameraCaptureResolution.High, CameraCaptureFrameRate? frameRate = CameraCaptureFrameRate.Fps15)
         {
             lock (_sessionLocker)
             {
@@ -56,6 +60,9 @@ namespace Xamarin.Forms.OpenTok.iOS.Service
 
                 EndSession();
                 IsSessionStarted = true;
+
+                _resolution = getParseResolution(resolution);
+                _frameRate = getParseFrameRate(frameRate);
 
                 Session = new OTSession(ApiKey, SessionId, null);
                 Session.ConnectionDestroyed += OnConnectionDestroyed;
@@ -72,6 +79,55 @@ namespace Xamarin.Forms.OpenTok.iOS.Service
                     return error == null;
                 }
             }
+        }
+
+        private OTCameraCaptureResolution getParseResolution(CameraCaptureResolution? resolution)
+        {
+            OTCameraCaptureResolution reply = OTCameraCaptureResolution.High;
+
+            if (resolution != null)
+            {
+                switch (resolution)
+                {
+                    case CameraCaptureResolution.Low:
+                        reply = OTCameraCaptureResolution.Low;
+                        break;
+                    case CameraCaptureResolution.Medium:
+                        reply = OTCameraCaptureResolution.Medium;
+                        break;
+                    case CameraCaptureResolution.High:
+                        reply = OTCameraCaptureResolution.High;
+                        break;
+                }
+            }
+
+            return reply;
+        }
+
+        private OTCameraCaptureFrameRate getParseFrameRate(CameraCaptureFrameRate? frameRate)
+        {
+            OTCameraCaptureFrameRate reply = OTCameraCaptureFrameRate.OTCameraCaptureFrameRate15FPS;
+
+            if (frameRate != null)
+            {
+                switch (frameRate)
+                {
+                    case CameraCaptureFrameRate.Fps1:
+                        reply = OTCameraCaptureFrameRate.OTCameraCaptureFrameRate1FPS;
+                        break;
+                    case CameraCaptureFrameRate.Fps7:
+                        reply = OTCameraCaptureFrameRate.OTCameraCaptureFrameRate7FPS;
+                        break;
+                    case CameraCaptureFrameRate.Fps15:
+                        reply = OTCameraCaptureFrameRate.OTCameraCaptureFrameRate15FPS;
+                        break;
+                    case CameraCaptureFrameRate.Fps30:
+                        reply = OTCameraCaptureFrameRate.OTCameraCaptureFrameRate30FPS;
+                        break;
+                }
+            }
+
+            return reply;
         }
 
         public override void EndSession()
@@ -202,8 +258,8 @@ namespace Xamarin.Forms.OpenTok.iOS.Service
             PublisherKit = new OTPublisher(null, new OTPublisherSettings
             {
                 Name = "XamarinOpenTok",
-                CameraFrameRate = OTCameraCaptureFrameRate.OTCameraCaptureFrameRate15FPS,
-                CameraResolution = OTCameraCaptureResolution.High
+                CameraFrameRate = _frameRate,
+                CameraResolution = _resolution
             })
             {
                 PublishVideo = IsVideoPublishingEnabled,
