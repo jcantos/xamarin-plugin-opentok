@@ -8,6 +8,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageTags>opentok, ios, android, xamarin, xamarin.forms, tokbox, video, chat, plugin</PackageTags>
     <Description>Plugin OpenTok para Xamarin.Forms</Description>
+    <PackageProjectUrl>https://github.com/jcantos/xamarin-plugin-opentok/tree/master/Lib</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>
